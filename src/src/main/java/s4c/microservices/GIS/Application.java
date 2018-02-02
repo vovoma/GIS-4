@@ -5,11 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-//@EnableEurekaClient
-//@EnableDiscoveryClient
+@EnableEurekaClient
+@EnableDiscoveryClient
 @EnableWebMvc
 @SpringBootApplication
 @ComponentScan("s4c.microservices.GIS")
