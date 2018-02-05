@@ -48,9 +48,10 @@ public class WfsApiController implements WfsApi {
 
 		List<Device> devices = wfsService.getDummyDevices();
 
-		final HttpHeaders httpHeaders= new HttpHeaders();
-	    httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-		return ResponseEntity.ok().headers(httpHeaders).body(devices);
+//		final HttpHeaders httpHeaders= new HttpHeaders();
+//	    httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+//		return ResponseEntity.ok().headers(httpHeaders).body(devices);
+		return ResponseEntity.ok().body(devices);
 	}
 
 	
