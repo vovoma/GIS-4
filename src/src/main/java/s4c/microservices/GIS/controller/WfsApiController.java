@@ -6,7 +6,9 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,7 +48,9 @@ public class WfsApiController implements WfsApi {
 
 		List<Device> devices = wfsService.getDummyDevices();
 
-		return ResponseEntity.ok().body(devices);
+		final HttpHeaders httpHeaders= new HttpHeaders();
+	    httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+		return ResponseEntity.ok().headers(httpHeaders).body(devices);
 	}
 
 	
