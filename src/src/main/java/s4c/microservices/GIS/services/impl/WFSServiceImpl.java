@@ -54,8 +54,8 @@ public class WFSServiceImpl implements WFSService {
 		StringBuilder sb = new StringBuilder();
 		sb.append("?service=" + service);
 		sb.append("&version=" + version);
-		sb.append("&request=" + request);		
-		sb.append("&outputFormat=" + "JSON");
+		sb.append("&request=" + request);	
+		
 
 		return getRequest(sb.toString());
 	}
