@@ -1,132 +1,259 @@
 package s4c.microservices.GIS.model;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonPropertyOrder({ "_id", "name", "protocol", "entity_type", "transport_protocol", "public", "assets", "owner",
+		"attributes", "lazy", "static_attributes", "commands", "internal_attributes", "createdAt", "updatedAt",
+		"expiresAt", "latitude", "longitude", "bbox" })
 public class Device {
-	
-	private String _id;
-	private String name;
-	private String protocol;
-	private String entity_type;
-	private String transport_protocol;
-	private boolean isPublic;
-	private String owner;
-	private String __v;
-	private List<String> internal_attributes;
-	private List<String> commands;
-	private List<String> lazy;
-	private List<String> static_attributes;
-	private List<String> attributes;
-	private Geometry geometry;
-	
-	
-	
-	public Device(String _id, String name, String protocol, String entity_type, String transport_protocol,
-			boolean isPublic, String owner, String __v, List<String> internal_attributes, List<String> commands,
-			List<String> lazy, List<String> static_attributes, List<String> attributes, Geometry geometry) {
-		super();
-		this._id = _id;
-		this.name = name;
-		this.protocol = protocol;
-		this.entity_type = entity_type;
-		this.transport_protocol = transport_protocol;
-		this.isPublic = isPublic;
-		this.owner = owner;
-		this.__v = __v;
-		this.internal_attributes = internal_attributes;
-		this.commands = commands;
-		this.lazy = lazy;
-		this.static_attributes = static_attributes;
-		this.attributes = attributes;
-		this.geometry = geometry;
+
+	@JsonProperty("_id")
+	private Object id;
+	@JsonProperty("name")
+	private Object name;
+	@JsonProperty("protocol")
+	private Object protocol;
+	@JsonProperty("entity_type")
+	private Object entityType;
+	@JsonProperty("transport_protocol")
+	private Object transportProtocol;
+	@JsonProperty("public")
+	private Object _public;
+	@JsonProperty("assets")
+	private Object assets;
+	@JsonProperty("owner")
+	private Object owner;
+	@JsonProperty("attributes")
+	private Object attributes;
+	@JsonProperty("lazy")
+	private Object lazy;
+	@JsonProperty("static_attributes")
+	private Object staticAttributes;
+	@JsonProperty("commands")
+	private Object commands;
+	@JsonProperty("internal_attributes")
+	private Object internalAttributes;
+	@JsonProperty("createdAt")
+	private Object createdAt;
+	@JsonProperty("updatedAt")
+	private Object updatedAt;
+	@JsonProperty("expiresAt")
+	private Object expiresAt;
+	@JsonProperty("latitude")
+	private Object latitude;
+	@JsonProperty("longitude")
+	private Object longitude;
+	@JsonProperty("bbox")
+	private Object bbox;
+	@JsonIgnore
+	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+	@JsonProperty("_id")
+	public Object getId() {
+		return id;
 	}
-	
-	public String get_id() {
-		return _id;
+
+	@JsonProperty("_id")
+	public void setId(Object id) {
+		this.id = id;
 	}
-	public void set_id(String _id) {
-		this._id = _id;
-	}
-	public String getName() {
+
+	@JsonProperty("name")
+	public Object getName() {
 		return name;
 	}
-	public void setName(String name) {
+
+	@JsonProperty("name")
+	public void setName(Object name) {
 		this.name = name;
 	}
-	public String getProtocol() {
+
+	@JsonProperty("protocol")
+	public Object getProtocol() {
 		return protocol;
 	}
-	public void setProtocol(String protocol) {
+
+	@JsonProperty("protocol")
+	public void setProtocol(Object protocol) {
 		this.protocol = protocol;
 	}
-	public String getEntity_type() {
-		return entity_type;
+
+	@JsonProperty("entity_type")
+	public Object getEntityType() {
+		return entityType;
 	}
-	public void setEntity_type(String entity_type) {
-		this.entity_type = entity_type;
+
+	@JsonProperty("entity_type")
+	public void setEntityType(Object entityType) {
+		this.entityType = entityType;
 	}
-	public String getTransport_protocol() {
-		return transport_protocol;
+
+	@JsonProperty("transport_protocol")
+	public Object getTransportProtocol() {
+		return transportProtocol;
 	}
-	public void setTransport_protocol(String transport_protocol) {
-		this.transport_protocol = transport_protocol;
+
+	@JsonProperty("transport_protocol")
+	public void setTransportProtocol(Object transportProtocol) {
+		this.transportProtocol = transportProtocol;
 	}
-	public boolean isPublic() {
-		return isPublic;
+
+	@JsonProperty("public")
+	public Object getPublic() {
+		return _public;
 	}
-	public void setPublic(boolean isPublic) {
-		this.isPublic = isPublic;
+
+	@JsonProperty("public")
+	public void setPublic(Object _public) {
+		this._public = _public;
 	}
-	public String getOwner() {
+
+	@JsonProperty("assets")
+	public Object getAssets() {
+		return assets;
+	}
+
+	@JsonProperty("assets")
+	public void setAssets(Object assets) {
+		this.assets = assets;
+	}
+
+	@JsonProperty("owner")
+	public Object getOwner() {
 		return owner;
 	}
-	public void setOwner(String owner) {
+
+	@JsonProperty("owner")
+	public void setOwner(Object owner) {
 		this.owner = owner;
 	}
-	public String get__v() {
-		return __v;
-	}
-	public void set__v(String __v) {
-		this.__v = __v;
-	}
-	public List<String> getInternal_attributes() {
-		return internal_attributes;
-	}
-	public void setInternal_attributes(List<String> internal_attributes) {
-		this.internal_attributes = internal_attributes;
-	}
-	public List<String> getCommands() {
-		return commands;
-	}
-	public void setCommands(List<String> commands) {
-		this.commands = commands;
-	}
-	public List<String> getLazy() {
-		return lazy;
-	}
-	public void setLazy(List<String> lazy) {
-		this.lazy = lazy;
-	}
-	public List<String> getStatic_attributes() {
-		return static_attributes;
-	}
-	public void setStatic_attributes(List<String> static_attributes) {
-		this.static_attributes = static_attributes;
-	}
-	public List<String> getAttributes() {
+
+	@JsonProperty("attributes")
+	public Object getAttributes() {
 		return attributes;
 	}
-	public void setAttributes(List<String> attributes) {
+
+	@JsonProperty("attributes")
+	public void setAttributes(Object attributes) {
 		this.attributes = attributes;
 	}
-	public Geometry getGeometry() {
-		return geometry;
-	}
-	public void setGeometry(Geometry geometry) {
-		this.geometry = geometry;
-	}
-	
-	
 
+	@JsonProperty("lazy")
+	public Object getLazy() {
+		return lazy;
+	}
+
+	@JsonProperty("lazy")
+	public void setLazy(Object lazy) {
+		this.lazy = lazy;
+	}
+
+	@JsonProperty("static_attributes")
+	public Object getStaticAttributes() {
+		return staticAttributes;
+	}
+
+	@JsonProperty("static_attributes")
+	public void setStaticAttributes(Object staticAttributes) {
+		this.staticAttributes = staticAttributes;
+	}
+
+	@JsonProperty("commands")
+	public Object getCommands() {
+		return commands;
+	}
+
+	@JsonProperty("commands")
+	public void setCommands(Object commands) {
+		this.commands = commands;
+	}
+
+	@JsonProperty("internal_attributes")
+	public Object getInternalAttributes() {
+		return internalAttributes;
+	}
+
+	@JsonProperty("internal_attributes")
+	public void setInternalAttributes(Object internalAttributes) {
+		this.internalAttributes = internalAttributes;
+	}
+
+	@JsonProperty("createdAt")
+	public Object getCreatedAt() {
+		return createdAt;
+	}
+
+	@JsonProperty("createdAt")
+	public void setCreatedAt(Object createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	@JsonProperty("updatedAt")
+	public Object getUpdatedAt() {
+		return updatedAt;
+	}
+
+	@JsonProperty("updatedAt")
+	public void setUpdatedAt(Object updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	@JsonProperty("expiresAt")
+	public Object getExpiresAt() {
+		return expiresAt;
+	}
+
+	@JsonProperty("expiresAt")
+	public void setExpiresAt(Object expiresAt) {
+		this.expiresAt = expiresAt;
+	}
+
+	@JsonProperty("latitude")
+	public Object getLatitude() {
+		return latitude;
+	}
+
+	@JsonProperty("latitude")
+	public void setLatitude(Object latitude) {
+		this.latitude = latitude;
+	}
+
+	@JsonProperty("longitude")
+	public Object getLongitude() {
+		return longitude;
+	}
+
+	@JsonProperty("longitude")
+	public void setLongitude(Object longitude) {
+		this.longitude = longitude;
+	}
+
+	@JsonProperty("bbox")
+	public Object getBbox() {
+		return bbox;
+	}
+
+	@JsonProperty("bbox")
+	public void setBbox(Object bbox) {
+		this.bbox = bbox;
+	}
+
+	@JsonAnyGetter
+	public Map<String, Object> getAdditionalProperties() {
+		return this.additionalProperties;
+	}
+
+	@JsonAnySetter
+	public void setAdditionalProperty(String name, Object value) {
+		this.additionalProperties.put(name, value);
+	}
 
 }

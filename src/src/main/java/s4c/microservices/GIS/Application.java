@@ -14,7 +14,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableDiscoveryClient
 @EnableWebMvc
 @SpringBootApplication
-@ComponentScan("s4c.microservices.GIS")
+@ComponentScan("s4c.microservices")
 @EntityScan("s4c.microservices.GIS.model")
 public class Application extends SpringBootServletInitializer {
 
