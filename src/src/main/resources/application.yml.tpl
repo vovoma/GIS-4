@@ -20,3 +20,8 @@ logging:
   file: logs/${spring.application.name}.log
   level:
     org.springframework.cloud: DEBUG
+    
+proxy:
+  geoserver:
+    servlet_url: /ows/*
+    target_url: http://_GEOSERVER_VHOST_:_GEOSERVER_PORT_/geoserver/ows

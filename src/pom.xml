@@ -34,7 +34,7 @@
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 			<version>1.4.0.RELEASE</version>
 		</dependency>
- 		<dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
@@ -101,10 +101,13 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!--  HTTP Proxy Dependency -->
 		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
+			<groupId>org.mitre.dsmiley.httpproxy</groupId>
+			<artifactId>smiley-http-proxy-servlet</artifactId>
+			<version>1.10</version>
 		</dependency>
+
 
 	</dependencies>
 
