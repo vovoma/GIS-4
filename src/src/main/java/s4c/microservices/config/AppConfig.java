@@ -2,28 +2,40 @@ package s4c.microservices.config;
 
 import javax.annotation.PostConstruct;
 
+import org.mitre.dsmiley.httpproxy.ProxyServlet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.bind.RelaxedPropertyResolver;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
 @Configuration
 @PropertySource("classpath:application.properties")
-public class AppConfig {
+public class AppConfig implements EnvironmentAware{
 
 	@Autowired
 	private Environment environment;
-	private String WFSBaseUrl;
-//	private String sabreOauth2Url;
-//    private String sabreClientId;
-//    private String sabreClientKey;
+	
+	@Bean
+	public ServletRegistrationBean servletRegistrationBean() {
+		ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean(new ProxyServlet(),
+				propertyResolver.getProperty("servlet_url"));
+		servletRegistrationBean.addInitParameter("targetUri",
+				propertyResolver.getProperty("target_url"));
+		servletRegistrationBean.addInitParameter(ProxyServlet.P_LOG,
+				propertyResolver.getProperty("logging_enabled", "false"));
+		return servletRegistrationBean;
+	}
+
+	private RelaxedPropertyResolver propertyResolver;
+	
     	 
     @PostConstruct
 	private void init(){
-    	setWFSBaseUrl(environment.getProperty("WFS.BASE.URL"));
-//    	setSabreOauth2Url(environment.getProperty("API.URL"));
-//    	setSabreClientId(environment.getProperty("CLIENT.ID"));
-//    	setSabreClientKey(environment.getProperty("CLIENT.KEY"));   	
+    	   	
     }
     
     public Environment getEnvironment() {
@@ -31,34 +43,6 @@ public class AppConfig {
 	}
 	public void setEnvironment(Environment environment) {
 		this.environment = environment;
-	}
-//	public String getSabreClientId() {
-//		return sabreClientId;
-//	}
-//	public void setSabreClientId(String sabreClientId) {
-//		this.sabreClientId = sabreClientId;
-//	}
-//	public String getSabreClientKey() {
-//		return sabreClientKey;
-//	}
-//	public void setSabreClientKey(String sabreClientKey) {
-//		this.sabreClientKey = sabreClientKey;
-//	}
-	
-//    public String getSabreOauth2Url() {
-//		return sabreOauth2Url;
-//	}
-//    
-//	public void setSabreOauth2Url(String sabreOauth2Url) {
-//		this.sabreOauth2Url = sabreOauth2Url;
-//	}
-	
-	public String getWFSBaseUrl() {
-		return WFSBaseUrl;
-	}
-
-	public void setWFSBaseUrl(String WFSBaseUrl) {
-		this.WFSBaseUrl = WFSBaseUrl;
-	}
- 
+		this.propertyResolver = new RelaxedPropertyResolver(environment, "proxy.geoserver.");
+	} 
 }
