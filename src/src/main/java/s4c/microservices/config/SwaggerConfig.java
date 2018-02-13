@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.ResponseEntity;
 
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -14,6 +15,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+@PropertySource("classpath:application.properties")
 @Configuration
 @EnableSwagger2
 class SwaggerConfig {
@@ -23,19 +25,14 @@ class SwaggerConfig {
      *
      * @return Swagger Docket
      */
-    @Bean
-    public Docket s4cApi() {
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("s4c")
-                .apiInfo(apiInfo())
-                .select()
-                    .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                    .paths(PathSelectors.any())
-                    .build()
-                .pathMapping("/")
-                .genericModelSubstitutes(ResponseEntity.class)
-                .useDefaultResponseMessages(false);
-    }
+	 @Bean
+     public Docket api() {
+		 return new Docket(DocumentationType.SWAGGER_2)				 
+         .select()                                  
+         .apis(RequestHandlerSelectors.withClassAnnotation(Api.class))              
+         .paths(PathSelectors.any())                          
+         .build();                                          
+     }
 
     /**
      * Generate Api Info

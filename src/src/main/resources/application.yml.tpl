@@ -23,5 +23,5 @@ logging:
     
 proxy:
   geoserver:
-    servlet_url: /ows/*
+    servlet_url: /gis/ows/*
     target_url: http://_GEOSERVER_HOST_:_GEOSERVER_PORT_/geoserver/ows
