@@ -5,10 +5,10 @@
 	<groupId>s4c.microservices</groupId>
 	<artifactId>GIS</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 
 	<name>GIS</name>
 	<url>http://maven.apache.org</url>
-
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -18,9 +18,11 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<aspectj.version>1.8.10</aspectj.version>
+		<allure.version>1.4.11</allure.version>
 		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<start-class>s4c.microservices.GIS.Application</start-class>
+-               <maven.compiler.target>1.8</maven.compiler.target>
+-               <start-class>s4c.microservices.GIS.Application</start-class>
 	</properties>
 
 	<dependencies>
