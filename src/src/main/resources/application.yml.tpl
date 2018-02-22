@@ -20,8 +20,19 @@ logging:
   file: logs/${spring.application.name}.log
   level:
     org.springframework.cloud: DEBUG
-    
-proxy:
-  geoserver:
-    servlet_url: /gis/ows/*
-    target_url: http://_GEOSERVER_HOST_:_GEOSERVER_PORT_/geoserver/ows
+       
+zuul:
+  prefix: /gis
+  routes:
+    gis:
+      path: /ows/**
+      url: http://_GEOSERVER_HOST_:_GEOSERVER_PORT_/geoserver/ows
+      strip-prefix: false    
+      
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
