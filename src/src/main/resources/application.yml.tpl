@@ -15,20 +15,11 @@ eureka:
     healthcheck:
       enabled: true
     lease: null
-duration: 5
-logging:
-  file: logs/${spring.application.name}.log
-  level:
-    org.springframework.cloud: DEBUG
-       
-zuul:
-  prefix: /gis
+zuul:  
   routes:
     gis:
-      path: /ows/**
-      url: http://_GEOSERVER_HOST_:_GEOSERVER_PORT_/geoserver/ows
-      strip-prefix: false    
-      
+      path: /gis/ows/**
+      url: http://_GEOSERVER_HOST_:_GEOSERVER_PORT_/geoserver/ows      
 hystrix:
   command:
     default:
@@ -36,3 +27,8 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 60000
+duration: 5
+logging:
+  file: logs/${spring.application.name}.log
+  level:
+    org.springframework.cloud: DEBUG
