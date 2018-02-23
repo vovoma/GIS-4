@@ -2,20 +2,21 @@ package s4c.microservices.GIS;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+
+import s4c.microservices.GIS.filters.PreFilter;
 
 @EnableZuulProxy
 @EnableEurekaClient
 @EnableDiscoveryClient
 @SpringBootApplication
 @ComponentScan("s4c.microservices")
-@EntityScan("s4c.microservices.GIS.model")
 public class Application extends SpringBootServletInitializer {
 
     @Override
@@ -25,6 +26,11 @@ public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Application.class, args);
+    }
+    
+    @Bean
+    public PreFilter preFilter() {
+      return new PreFilter();
     }
 
 }
