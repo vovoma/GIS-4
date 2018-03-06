@@ -65,7 +65,7 @@ public class AppBasicTest
 		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 	
-	@Test
+	@Test 
 	public void WFSGetMapTest() {
 		boolean success=false;
 		String url = "/gis/ows?service=WMS&version=1.1.0&request=GetMap&layers=s4c:devices&styles=&bbox=-3.806941,43.461733,-3.782793,43.470198&width=768&height=330&srs=EPSG:4326&format=image/png";
