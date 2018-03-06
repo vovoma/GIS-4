@@ -42,10 +42,9 @@ public class PreFilter extends ZuulFilter {
 	public Object run() {
 		RequestContext ctx = RequestContext.getCurrentContext();
 		HttpServletRequest request = ctx.getRequest();
-
-		Map<String, List<String>> params = ctx.getRequestQueryParams();		
+		Map<String, List<String>> params = ctx.getRequestQueryParams();	    
 		
-		List<String> cql_filter = buildFilter();		
+		List<String> cql_filter = buildFilter(request.getHeader("X-Authorization-s4c"));		
 		
 		if (!params.containsKey("cql_filter")) {
 			params.put("cql_filter", cql_filter);
@@ -56,15 +55,15 @@ public class PreFilter extends ZuulFilter {
 		
 		ctx.setRequestQueryParams(params);
 
-		log.info(String.format("%s request to %s", request.getMethod(), request.getRequestURL().toString()));		
+		log.info(String.format("%s request to %s with params %s", request.getMethod(), request.getRequestURL().toString(),params.toString()));		
 
 		return null;
 	}
 
-	private List<String> buildFilter() {
+	private List<String> buildFilter(String JWTTokenHeaderValue) {
 		StringBuilder sb = new StringBuilder();		
 		sb.append("\"_id.id\" IN (");				
-		List<Device> devices = deviceManagementService.getMyDevices();
+		List<Device> devices = deviceManagementService.getMyDevices(JWTTokenHeaderValue);
 		Device device =null;
 		if (devices != null && devices.size()>0) {
 			for (int i=0;i<devices.size();i++) {
@@ -76,9 +75,6 @@ public class PreFilter extends ZuulFilter {
 			
 			sb.append(")");
 		}
-		
-//		sb.append("'" + "187A93090D37" + "'");
-//		sb.append(")");
 		
 		return Arrays.asList(sb.toString());
 	}

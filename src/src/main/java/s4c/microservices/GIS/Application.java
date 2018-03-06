@@ -21,33 +21,38 @@ import s4c.microservices.GIS.services.external.DeviceManagementService;
 @SpringBootApplication
 @ComponentScan("s4c.microservices")
 public class Application extends SpringBootServletInitializer {
-	
-//	public static final String DEVICE_MANAGEMENT_SERVICE_URL = "http://DEVICE-MANAGEMENT";
+
+	// TODO: Change to eureka format url when device-management service is registered
+	// correctly in Eureka
+	// public static final String DEVICE_MANAGEMENT_SERVICE_URL =
+	// "http://DEVICE-MANAGEMENT";
 	public static final String DEVICE_MANAGEMENT_SERVICE_URL = "http://us1.fiwoo.eu:9000";
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(Application.class);
-    }
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+		return application.sources(Application.class);
+	}
 
-    public static void main(String[] args) throws Exception {
-        SpringApplication.run(Application.class, args);
-    }
-    
-//    @LoadBalanced
-    @Bean
-    RestTemplate restTemplate() {	
-        return new RestTemplate();
-    }
-    
-    @Bean
-    public PreFilter preFilter() {
-      return new PreFilter();
-    }
-    
-    @Bean
-    public DeviceManagementService deviceManagementService() {
-        return new DeviceManagementService(DEVICE_MANAGEMENT_SERVICE_URL);
-    }
+	public static void main(String[] args) throws Exception {
+		SpringApplication.run(Application.class, args);
+	}
+
+	// TODO: Use @LoadBalanced annotation when device-management service is registered
+	// correctly in Eureka
+	// @LoadBalanced
+	@Bean
+	RestTemplate restTemplate() {
+		return new RestTemplate();
+	}
+
+	@Bean
+	public PreFilter preFilter() {
+		return new PreFilter();
+	}
+
+	@Bean
+	public DeviceManagementService deviceManagementService() {
+		return new DeviceManagementService(DEVICE_MANAGEMENT_SERVICE_URL);
+	}
 
 }
