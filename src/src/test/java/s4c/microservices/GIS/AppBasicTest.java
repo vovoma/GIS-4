@@ -65,6 +65,7 @@ public class AppBasicTest
 		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 	
+
 	@Test 
 	public void WFSGetMapTest() {
 		boolean success=false;
