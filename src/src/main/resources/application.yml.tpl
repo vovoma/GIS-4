@@ -15,13 +15,20 @@ eureka:
     healthcheck:
       enabled: true
     lease: null
+zuul:  
+  routes:
+    gis:
+      path: /gis/ows/**
+      url: http://_GEOSERVER_HOST_:_GEOSERVER_PORT_/geoserver/ows      
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
 duration: 5
 logging:
   file: logs/${spring.application.name}.log
   level:
     org.springframework.cloud: DEBUG
-    
-proxy:
-  geoserver:
-    servlet_url: /gis/ows/*
-    target_url: http://_GEOSERVER_HOST_:_GEOSERVER_PORT_/geoserver/ows

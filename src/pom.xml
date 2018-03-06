@@ -100,12 +100,10 @@
 			<artifactId>validation-api</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
-		<!-- HTTP Proxy Dependency -->
+		
 		<dependency>
-			<groupId>org.mitre.dsmiley.httpproxy</groupId>
-			<artifactId>smiley-http-proxy-servlet</artifactId>
-			<version>1.10</version>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-zuul</artifactId>
 		</dependency>
 
 		<dependency>
@@ -113,11 +111,11 @@
 			<artifactId>hibernate-validator</artifactId>
 		</dependency>
 
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjweaver</artifactId>
 			<scope>test</scope>			
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>ru.yandex.qatools.allure</groupId>
@@ -132,6 +130,18 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Dalston.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 
 	<build>

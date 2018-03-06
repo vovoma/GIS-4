@@ -38,7 +38,7 @@ public class AppBasicTest
 	    return new ByteArrayHttpMessageConverter();
 	}
 	
-//	@Test
+	@Test
 	public void WFSGetCapabilitiesTest() {
 		String url = "/gis/ows?service=wfs&version=2.0.0&request=GetCapabilities";
 		HashMap<String, String> urlVariables = new HashMap<String, String>();	
@@ -47,7 +47,7 @@ public class AppBasicTest
 		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 	
-//	@Test
+	@Test
 	public void WMSGetCapabilitiesTest() {
 		String url = "/gis/ows?service=wms&version=1.3.0&request=GetCapabilities";
 		HashMap<String, String> urlVariables = new HashMap<String, String>();	
@@ -56,7 +56,7 @@ public class AppBasicTest
 		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 	
-//	@Test
+	@Test
 	public void WFSGetFeatureTest() {
 		String url = "/gis/ows?service=wfs&version=2.0.0&request=Getfeature&typeName=s4c:devices&outputFormat=JSON";
 		HashMap<String, String> urlVariables = new HashMap<String, String>();	
@@ -64,23 +64,5 @@ public class AppBasicTest
 				Object.class, String.class,urlVariables);
 		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
-	
-//	@Test
-	public void WFSGetMapTest() {
-		boolean success=false;
-		String url = "/gis/ows?service=WMS&version=1.1.0&request=GetMap&layers=s4c:devices&styles=&bbox=-3.806941,43.461733,-3.782793,43.470198&width=768&height=330&srs=EPSG:4326&format=image/png";
-		HashMap<String, String> urlVariables = new HashMap<String, String>();	
-		byte[] imageBytes = restTemplate.getForObject(url, byte[].class);
-		try {
-			Files.write(Paths.get("image.png"), imageBytes);
-			success= true;
-			Files.delete(Paths.get("image.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Assert.assertEquals(true, success);
-	}
-
 }
 
