@@ -2,7 +2,6 @@ package s4c.microservices.GIS.services.external;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -17,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import s4c.microservices.GIS.filters.PreFilter;
 import s4c.microservices.GIS.model.external.Device;
 
 @Service
@@ -39,7 +37,8 @@ public class DeviceManagementService {
 			
 			HttpHeaders headers = new HttpHeaders();			
 			
-			headers.set("X-Authorization-s4c", JWTTokenHeaderValue);
+			headers.set("X-Authorization-s4c", JWTTokenHeaderValue);			
+			headers.setContentType(MediaType.APPLICATION_JSON);
 
 			HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
 
