@@ -24,9 +24,8 @@ public class Application extends SpringBootServletInitializer {
 
 	// TODO: Change to eureka format url when device-management service is registered
 	// correctly in Eureka
-	// public static final String DEVICE_MANAGEMENT_SERVICE_URL =
-	// "http://DEVICE-MANAGEMENT";
-	public static final String DEVICE_MANAGEMENT_SERVICE_URL = "http://us1.fiwoo.eu:9000";
+	public static final String DEVICE_MANAGEMENT_SERVICE_URL = "http://DEVICE-MANAGEMENT";
+//	public static final String DEVICE_MANAGEMENT_SERVICE_URL = "http://us1.fiwoo.eu:9000";
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {

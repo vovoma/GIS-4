@@ -42,22 +42,26 @@ public class PreFilter extends ZuulFilter {
 	public Object run() {
 		RequestContext ctx = RequestContext.getCurrentContext();
 		HttpServletRequest request = ctx.getRequest();
-		Map<String, List<String>> params = ctx.getRequestQueryParams();
+		
+		if(request.getRequestURI().contains("gis/ows")){
+			Map<String, List<String>> params = ctx.getRequestQueryParams();
+			List<String> cql_filter = buildFilter(request.getHeader("X-Authorization-s4c"));
 
-		List<String> cql_filter = buildFilter(request.getHeader("X-Authorization-s4c"));
+			if (!params.containsKey("cql_filter")) {
+				params.put("cql_filter", cql_filter);
+			} else {
+				params.remove("cql_filter");
+				params.put("cql_filter", cql_filter);
+			}
 
-		if (!params.containsKey("cql_filter")) {
-			params.put("cql_filter", cql_filter);
-		} else {
-			params.remove("cql_filter");
-			params.put("cql_filter", cql_filter);
+			ctx.setRequestQueryParams(params);
+
+			log.info(String.format("%s request to %s with params %s", request.getMethod(),
+					request.getRequestURL().toString(), params.toString()));
+
+			
 		}
-
-		ctx.setRequestQueryParams(params);
-
-		log.info(String.format("%s request to %s with params %s", request.getMethod(),
-				request.getRequestURL().toString(), params.toString()));
-
+		
 		return null;
 	}
 
@@ -72,10 +76,10 @@ public class PreFilter extends ZuulFilter {
 				sb.append("'" + device.getEntity_name() + "'");
 				if (i != devices.size() - 1)
 					sb.append(",");
-			}
-
-			sb.append(")");
+			}			
 		}
+		
+		sb.append(")");
 
 		return Arrays.asList(sb.toString());
 	}
