@@ -39,11 +39,12 @@ public class AppBasicTest
 	}
 	
 	@Test
-	public void WFSGetCapabilitiesTest() {
-		String url = "/gis/ows?service=wfs&version=2.0.0&request=GetCapabilities";
+	public void WFSGetFeatureTest() {
+		String url = "/gis/ows?service=wfs&version=2.0.0&request=Getfeature&typeName=s4c:devices&outputFormat=JSON";
 		HashMap<String, String> urlVariables = new HashMap<String, String>();	
 		ResponseEntity<?> response = this.restTemplate.getForEntity(url,
 				Object.class, String.class,urlVariables);
+		
 		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 	
@@ -57,13 +58,14 @@ public class AppBasicTest
 	}
 	
 	@Test
-	public void WFSGetFeatureTest() {
-		String url = "/gis/ows?service=wfs&version=2.0.0&request=Getfeature&typeName=s4c:devices&outputFormat=JSON";
+	public void WFSGetCapabilitiesTest() {
+		String url = "/gis/ows?service=wfs&version=2.0.0&request=GetCapabilities";
 		HashMap<String, String> urlVariables = new HashMap<String, String>();	
 		ResponseEntity<?> response = this.restTemplate.getForEntity(url,
 				Object.class, String.class,urlVariables);
-		
 		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
+	
+	
 }
 
