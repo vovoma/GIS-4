@@ -62,6 +62,7 @@ public class AppBasicTest
 		HashMap<String, String> urlVariables = new HashMap<String, String>();	
 		ResponseEntity<?> response = this.restTemplate.getForEntity(url,
 				Object.class, String.class,urlVariables);
+		
 		Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
 	}
 }
