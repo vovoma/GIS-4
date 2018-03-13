@@ -3,13 +3,13 @@ package s4c.microservices.GIS.filters;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -20,6 +20,10 @@ import s4c.microservices.GIS.services.external.DeviceManagementService;
 public class PreFilter extends ZuulFilter {
 
 	private static Logger log = LoggerFactory.getLogger(PreFilter.class);
+
+	@Value("${contingency.mode}")
+	private boolean contingencyMode;
+
 	@Autowired
 	private DeviceManagementService deviceManagementService;
 
@@ -42,26 +46,29 @@ public class PreFilter extends ZuulFilter {
 	public Object run() {
 		RequestContext ctx = RequestContext.getCurrentContext();
 		HttpServletRequest request = ctx.getRequest();
-		
-		if(request.getRequestURI().contains("gis/ows")){
-			Map<String, List<String>> params = ctx.getRequestQueryParams();
-			List<String> cql_filter = buildFilter(request.getHeader("X-Authorization-s4c"));
+		Map<String, List<String>> params = ctx.getRequestQueryParams();
 
-			if (!params.containsKey("cql_filter")) {
-				params.put("cql_filter", cql_filter);
-			} else {
-				params.remove("cql_filter");
-				params.put("cql_filter", cql_filter);
+		if (!contingencyMode) {
+
+			if (request.getRequestURI().contains("gis/ows")
+					&& (!params.toString().toLowerCase().contains("request=[getcapabilities]"))) {
+
+				List<String> cql_filter = buildFilter(request.getHeader("X-Authorization-s4c"));
+
+				if (!params.containsKey("cql_filter")) {
+					params.put("cql_filter", cql_filter);
+				} else {
+					params.remove("cql_filter");
+					params.put("cql_filter", cql_filter);
+				}
+
+				ctx.setRequestQueryParams(params);
 			}
-
-			ctx.setRequestQueryParams(params);
-
-			log.info(String.format("%s request to %s with params %s", request.getMethod(),
-					request.getRequestURL().toString(), params.toString()));
-
-			
 		}
-		
+
+		log.debug(String.format("%s request to %s with params %s", request.getMethod(),
+				request.getRequestURL().toString(), params.toString()));
+
 		return null;
 	}
 
@@ -76,9 +83,9 @@ public class PreFilter extends ZuulFilter {
 				sb.append("'" + device.getEntity_name() + "'");
 				if (i != devices.size() - 1)
 					sb.append(",");
-			}			
+			}
 		}
-		
+
 		sb.append(")");
 
 		return Arrays.asList(sb.toString());
