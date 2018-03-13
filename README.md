@@ -27,4 +27,3 @@ Running `mvn test` will run the unit tests with JUnit.
 ## Deployment with Docker
 
 Pending
-
