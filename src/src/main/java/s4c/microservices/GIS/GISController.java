@@ -24,8 +24,8 @@ public class GISController {
 
 
     @SuppressWarnings("rawtypes")
-    @RequestMapping(method = RequestMethod.GET, value = "wmsGetCapabilities", produces="application/json")
-	@ApiOperation(value = "wmsGetCapabilities", nickname = "wmsGetCapabilities", response = String.class)
+    @RequestMapping(method = RequestMethod.GET, value = "wms", produces="application/json")
+	@ApiOperation(value = "GetCapabilities", nickname = "GetCapabilities", response = String.class)
     @ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = String.class),
 			@ApiResponse(code = 201, message = "OK"), @ApiResponse(code = 400, message = "Bad Request"),
 			@ApiResponse(code = 401, message = "Unauthorized"), @ApiResponse(code = 403, message = "Forbidden"),
@@ -37,8 +37,8 @@ public class GISController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "wmsGetMap")
-	@ApiOperation(value = "wmsGetMap", nickname = "wmsGetMap", response = ResponseEntity.class)
+    @RequestMapping(method = RequestMethod.GET, value = "ows")
+	@ApiOperation(value = "GetMap", nickname = "GetMap", response = ResponseEntity.class)
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Success", response = ResponseEntity.class),
 			@ApiResponse(code = 201, message = "OK"), @ApiResponse(code = 400, message = "Bad Request"),
 			@ApiResponse(code = 401, message = "Unauthorized"), @ApiResponse(code = 403, message = "Forbidden"),
