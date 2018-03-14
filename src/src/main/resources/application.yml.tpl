@@ -15,7 +15,8 @@ eureka:
     healthcheck:
       enabled: true
     lease: null
-zuul:  
+zuul:
+  ignoredPatterns: /**/swagger/**  
   routes:
     gis:
       path: /gis/ows/**
