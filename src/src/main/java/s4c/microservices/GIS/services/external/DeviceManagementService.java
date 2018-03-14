@@ -16,7 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import s4c.microservices.GIS.model.external.Device;
+import s4c.microservices.GIS.model.external.Device2;
 
 @Service
 public class DeviceManagementService {
@@ -31,7 +31,7 @@ public class DeviceManagementService {
 		this.serviceUrl = serviceUrl.startsWith("http") ? serviceUrl : "http://" + serviceUrl;
 	}
 
-	public List<Device> getMyDevices(String JWTTokenHeaderValue) {
+	public List<Device2> getMyDevices(String JWTTokenHeaderValue) {
 		String url = serviceUrl + "/devices/myDevices";
 		try {			
 			
@@ -44,19 +44,19 @@ public class DeviceManagementService {
 
 			log.debug("GET request to: " + url + " with JWT token " + JWTTokenHeaderValue);
 			
-			ResponseEntity<Device[]> response = restTemplate.exchange(url, HttpMethod.GET, entity, Device[].class);			
+			ResponseEntity<Device2[]> response = restTemplate.exchange(url, HttpMethod.GET, entity, Device2[].class);			
 			
 //			ResponseEntity<Device[]> response = restTemplate.getForEntity(serviceUrl + "/devices/myDevices",
 //					Device[].class);
 			if (response.getStatusCode().equals(HttpStatus.OK)) {
-				return new ArrayList<Device>(Arrays.asList(((Device[]) response.getBody())));
+				return new ArrayList<Device2>(Arrays.asList(((Device2[]) response.getBody())));
 			}
 		} catch (Exception ex) {
 			log.error("Error sending request:" + ex.toString());
-			return new ArrayList<Device>();
+			return new ArrayList<Device2>();
 		}
 
-		return new ArrayList<Device>();
+		return new ArrayList<Device2>();
 	}
 
 }
