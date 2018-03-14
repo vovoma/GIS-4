@@ -51,7 +51,7 @@ public class PreFilter extends ZuulFilter {
 		if (!contingencyMode) {
 
 			if (request.getRequestURI().contains("gis/ows")
-					&& (!params.toString().contains("request=[GetCapabilities]"))) {
+					&& (!params.toString().toLowerCase().contains("request=[getcapabilities]"))) {
 
 				List<String> cql_filter = buildFilter(request.getHeader("X-Authorization-s4c"));
 
