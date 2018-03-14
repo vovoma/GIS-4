@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 
-import s4c.microservices.GIS.model.external.Device;
+import s4c.microservices.GIS.model.external.Device2;
 import s4c.microservices.GIS.services.external.DeviceManagementService;
 
 public class PreFilter extends ZuulFilter {
@@ -39,7 +39,14 @@ public class PreFilter extends ZuulFilter {
 
 	@Override
 	public boolean shouldFilter() {
-		return true;
+		RequestContext ctx = RequestContext.getCurrentContext();
+		HttpServletRequest request = ctx.getRequest();
+		if (request.getRequestURI().contains("swagger")){
+			return false;
+		}else{
+			return true;	
+		}
+//		return true;
 	}
 
 	@Override
@@ -75,8 +82,8 @@ public class PreFilter extends ZuulFilter {
 	private List<String> buildFilter(String JWTTokenHeaderValue) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("\"_id.id\" IN (");
-		List<Device> devices = deviceManagementService.getMyDevices(JWTTokenHeaderValue);
-		Device device = null;
+		List<Device2> devices = deviceManagementService.getMyDevices(JWTTokenHeaderValue);
+		Device2 device = null;
 		if (devices != null && devices.size() > 0) {
 			for (int i = 0; i < devices.size(); i++) {
 				device = devices.get(i);
