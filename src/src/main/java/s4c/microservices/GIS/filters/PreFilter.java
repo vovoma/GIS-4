@@ -39,7 +39,14 @@ public class PreFilter extends ZuulFilter {
 
 	@Override
 	public boolean shouldFilter() {
-		return true;
+		RequestContext ctx = RequestContext.getCurrentContext();
+		HttpServletRequest request = ctx.getRequest();
+		if (request.getRequestURI().contains("swagger")){
+			return false;
+		}else{
+			return true;	
+		}
+//		return true;
 	}
 
 	@Override
