@@ -20,7 +20,8 @@ zuul:
   routes:
     gis:
       path: /gis/ows/**
-      url: http://_GEOSERVER_HOST_:_GEOSERVER_PORT_/geoserver/ows      
+      url: http://_GEOSERVER_HOST_:_GEOSERVER_PORT_/geoserver/ows
+      sensitiveHeaders: X-Authorization-s4c      
 hystrix:
   command:
     default:
