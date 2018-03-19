@@ -32,7 +32,7 @@ public class DeviceManagementService {
 	}
 
 	public List<Device2> getMyDevices(String JWTTokenHeaderValue) {
-		String url = serviceUrl + "/devices/myDevices";
+		String url = serviceUrl + "/devices";
 		try {			
 			
 			HttpHeaders headers = new HttpHeaders();			
@@ -53,10 +53,10 @@ public class DeviceManagementService {
 			}
 		} catch (Exception ex) {
 			log.error("Error sending request:" + ex.toString());
-			return new ArrayList<Device2>();
+			return null;
 		}
 
-		return new ArrayList<Device2>();
+		return null;
 	}
 
 }
