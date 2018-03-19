@@ -80,20 +80,24 @@ public class PreFilter extends ZuulFilter {
 	}
 
 	private List<String> buildFilter(String JWTTokenHeaderValue) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("\"_id.id\" IN (");
+		
+		StringBuilder sb = new StringBuilder();		
 		List<Device2> devices = deviceManagementService.getMyDevices(JWTTokenHeaderValue);
 		Device2 device = null;
 		if (devices != null && devices.size() > 0) {
+			sb.append("\"_id.id\" IN (");
 			for (int i = 0; i < devices.size(); i++) {
 				device = devices.get(i);
 				sb.append("'" + device.getEntity_name() + "'");
 				if (i != devices.size() - 1)
 					sb.append(",");
 			}
-		}
-
-		sb.append(")");
+			sb.append(")");
+		}else {
+			
+			sb.append("1=2");			
+			
+		}		
 
 		return Arrays.asList(sb.toString());
 	}
